@@ -1,5 +1,7 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page contentType = "text/html" pageEncoding = "UTF-8" %>
+<%@ page import = "java.util.*" %>
+<%@ page import = "server.model.Produto" %>
 <html>
 
 <head>
@@ -28,6 +30,7 @@
         <table class="table table-sm">
             <thead>
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Preço un</th>
                     <th scope="col">Unidade</th>
@@ -36,7 +39,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <%
+                    List<Produto> product = (List<Produto>) request.getAttribute("product");
+                    for ( Produto prod : product ){
+                        out.print("<tr>");
+                        out.print("<td>" + prod.getId() + "</td>");
+                        out.print("<td>" + prod.getNome() + "</td>");
+                        out.print("<td>" + prod.getMedida() + "</td>");
+                        out.print("<td>" + prod.getQuantidade() + "</td>");
+                        out.print("<td>" + String.format("%.2f", prod.getPreco()) + "</td>");
+                        out.print("</tr>");
+                    }
+                %>
+                <!-- <tr>
                     <th scope="row">Arroz</th>
                     <td>R$10</td>
                     <td>Kg</td>
@@ -70,7 +85,7 @@
                     <td></td>
                     <td><b>TOTAL</b></td>
                     <td><b>57 Itens</b></td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
         <div class="row justify-content-around">
