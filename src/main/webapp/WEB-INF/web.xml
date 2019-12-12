@@ -23,37 +23,22 @@ and open the template in the editor.
 
     <servlet>
         <servlet-name>Caixa</servlet-name>
-        <servlet-class>server.controller.Caixa</servlet-class>
+        <servlet-class>controller.Caixa</servlet-class>
     </servlet>
 
     <servlet>
-        <servlet-name>Estoque</servlet-name>
-        <servlet-class>server.controller.Estoque</servlet-class>
+        <servlet-name>Cadastro</servlet-name>
+        <servlet-class>controller.Cadastro</servlet-class>
     </servlet>
 
     <servlet>
-        <servlet-name>Estoque2</servlet-name>
-        <servlet-class>server.controller.Estoque2</servlet-class>
+        <servlet-name>Listagem</servlet-name>
+        <servlet-class>controller.Estoque</servlet-class>
     </servlet>
 
     <servlet>
         <servlet-name>Relatorio</servlet-name>
-        <servlet-class>server.controller.Relatorio</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>Cadastrar</servlet-name>
-        <servlet-class>server.controller.Cadastrar</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>Editar</servlet-name>
-        <servlet-class>server.controller.Editar</servlet-class>
-    </servlet>
-
-    <servlet>
-        <servlet-name>Final</servlet-name>
-        <servlet-class>server.controller.Final</servlet-class>
+        <servlet-class>controller.Relatorio</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -67,32 +52,17 @@ and open the template in the editor.
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>Estoque</servlet-name>
-        <url-pattern>/estoque</url-pattern>
+        <servlet-name>Cadastro</servlet-name>
+        <url-pattern>/cadastro</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>Estoque2</servlet-name>
-        <url-pattern>/estoque2</url-pattern>
+        <servlet-name>Listagem</servlet-name>
+        <url-pattern>/estoque</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>Relatorio</servlet-name>
         <url-pattern>/relatorio</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>Cadastrar</servlet-name>
-        <url-pattern>/cadastrar</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>Editar</servlet-name>
-        <url-pattern>/editar</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>Final</servlet-name>
-        <url-pattern>/final</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,96 +1,83 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri = "http://java.sun.com/jstl/core_rt" prefix = "c" %>
 <%@ page contentType = "text/html" pageEncoding = "UTF-8" %>
 <%@ page import = "java.util.*" %>
-<%@ page import = "server.model.Produto" %>
+<%@ page import = "model.Product" %>
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="./css/estoque.css">
-    <script src="js/bootstrap.min.js"> </script>
-    <link rel="stylesheet" href="js/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Estoque</title>
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
     <div class="container">
-        <div class="row justify-content-center">
-            <h1>Estoque</h1>
+        <div class="header">
+            <h2 class="txt-header">Estoque</h2>
         </div>
-        <div class="row justify-content-md-center">
-            <div class="column">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="product">
-                </div>
-            </div>
-            <div class="column">
-                <a href="estoque2" type="button" class="btn btn-sucess">Consultar</a>
-                <a href="estoque" type="button" class="btn btn-sucess">Limpar Busca</a>
-            </div>
-        </div>
-        <table class="table table-sm">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Preço un</th>
-                    <th scope="col">Unidade</th>
-                    <th scope="col">Quantidade</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                <%
-                    List<Produto> product = (List<Produto>) request.getAttribute("product");
-                    for ( Produto prod : product ){
-                        out.print("<tr>");
-                        out.print("<td>" + prod.getId() + "</td>");
-                        out.print("<td>" + prod.getNome() + "</td>");
-                        out.print("<td>" + prod.getMedida() + "</td>");
-                        out.print("<td>" + prod.getQuantidade() + "</td>");
-                        out.print("<td>" + String.format("%.2f", prod.getPreco()) + "</td>");
-                        out.print("</tr>");
-                    }
-                %>
-                <!-- <tr>
-                    <th scope="row">Arroz</th>
-                    <td>R$10</td>
-                    <td>Kg</td>
-                    <td>18</td>
-                    <td><a href="editar" type="button" class="btn btn-sucess">Editar</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">Feijão</th>
-                    <td>R$15</td>
-                    <td>Kg</td>
-                    <td>12</td>
-                    <td><a href="editar" type="button" class="btn btn-sucess">Editar</a></td>
 
-                </tr>
-                <tr>
-                    <th scope="row">Açucar</th>
-                    <td>R$5</td>
-                    <td>g</td>
-                    <td>20</td>
-                    <td><a href="editar" type="button" class="btn btn-sucess">Editar</a></td>
-                </tr>
-                <tr>
-                    <th scope="row">Miojo</th>
-                    <td>R$2</td>
-                    <td>un</td>
-                    <td>7</td>
-                    <td><a href="editar" type="button" class="btn btn-sucess">Editar</a></td>
-                </tr>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td><b>TOTAL</b></td>
-                    <td><b>57 Itens</b></td>
-                </tr> -->
-            </tbody>
-        </table>
-        <div class="row justify-content-around">
-            <a href="cadastrar" type="button" class="btn btn-sucess">Adicionar Produto</a>
-            <a href="home" type="button" class="btn btn-sucess">Voltar ao Caixa</a>
+        <center>
+            <form action="estoque" method="GET" class="search">
+                <input type="text" name="value" placeholder="Buscar um produto..." class="search-input" /><br>
+                <button class="search-btn">
+                    <label for="">Buscar</label>
+                </button>
+            </form>
+            <form action="estoque" method="POST">
+                <table class="table">
+                    <tr class="header-table">
+                        <th class="txt-black" width=10%>Código</th>
+                        <th class="txt-black" width=10%>Nome</th>
+                        <th class="txt-black" width=10%>Descrição</th>
+                        <th class="txt-black" width=10%>Preço (R$)</th>
+                        <th class="txt-black" width=10%>Quantidade</th>
+                    </tr>
+                    <%
+                        List<Product> products = (List<Product>) request.getAttribute("products");
+                        for (Product prod : products) {
+                            out.print("<tr align='center' height='30'>");
+                            out.print("<td class='produtos' align='center'> <span class='txt-black-small'>" + prod.getCode() + "</span> </td>");
+                            out.print("<td class='produtos' align='center'> <span class='txt-black-small'>" + prod.getName() + "</span> </td>");
+                            out.print("<td class='produtos' align='center'> <span class='txt-black-small'>" + prod.getDescription() + "</span> </td>");
+                            out.print("<td class='produtos' align='center'> <span class='txt-black-small'>" + prod.getPrice() + "</span> </td>");
+                            out.print("<td class='produtos' align='center'> <span class='txt-black-small'>" + prod.getAmount() + "</span> </td>");
+                            out.print("</tr>");
+                        }
+                    %>
+                </table>
+            </form>
+            <br><br>
+            <form action="estoque" method="POST">
+                <div align="center">
+                    <span class='txt-black'>Alterar produto</span>
+                </div>
+                <div align="center">
+                    
+                    <div class="event">
+                        <div>
+                            <input class="search-input-small" type='text' name='code'
+                                placeholder="Digite o código do produto..." />
+                        </div>
+                        <div class="select-style">
+                            <select name="options" aria-placeholder="Selecione a ação...">
+                                <option class="txt-black" value="editar">Editar</option>
+                                <option class="txt-black" value="excluir">Excluir</option>
+                            </select>
+                        </div>
+                        <div align="center">
+                            <input class="btn_execute" type="submit" value="Executar" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </center>
+        <div class="options">
+            <div class="btn_option">
+                <a href="cadastro" class="txt">Cadastrar Produtos</a>
+            </div>
+            <div class="btn_option">
+                <a href="caixa" class="txt">Caixa</a>
+            </div>
         </div>
     </div>
 </body>
